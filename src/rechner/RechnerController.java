@@ -1,5 +1,6 @@
 package rechner;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +49,7 @@ public class RechnerController {
 	private void doCalculationFor(String[] lines, TextArea ta, Type type) {
 		List<Integer> items = new ArrayList<>();
 		StringBuilder sb = new StringBuilder();
+		DecimalFormat df = new DecimalFormat(",##0.00");
 		for (String line : lines) {
 			try {
 				boolean doneSth = false;
@@ -83,8 +85,8 @@ public class RechnerController {
 						}
 					}
 
-					long zaehler = 0;
-					long nenner = 0;
+					double zaehler = 0;
+					double nenner = 0;
 					for (Entry<Integer, Integer> entry : map.entrySet()) {
 						int count = entry.getValue();
 						int value = entry.getKey();
@@ -98,9 +100,9 @@ public class RechnerController {
 					}
 					sb.append("  Average price is: ");
 					if (nenner != 0) {
-						sb.append((zaehler / nenner));
+						sb.append(df.format((zaehler / nenner)));
 					}
-					sb.append('\n');
+					sb.append(" € \n");
 
 				}
 			} catch (Exception e) {
